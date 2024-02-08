@@ -4,17 +4,23 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        //Dateneingabe aus Datei
-        File eingabe = new File("./eingabe.txt");
-        Scanner scanner = new Scanner(eingabe);
         ArrayList<Integer> eingabeDaten = new ArrayList<>();
-        while (scanner.hasNextLine()) {
-            String zeile = scanner.nextLine();
-            String[] elements = zeile.split(" ");
-            for (String element : elements) {
-                eingabeDaten.add(Integer.parseInt(element));
+        //Dateneingabe aus Datei
+        try {
+            File eingabe = new File("./eingabe.txt");
+            Scanner scanner = new Scanner(eingabe);
+            while (scanner.hasNextLine()) {
+                String zeile = scanner.nextLine();
+                String[] elements = zeile.split(" ");
+                for (String element : elements) {
+                    eingabeDaten.add(Integer.parseInt(element));
+                }
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Datei nicht gefunden.");
+            e.printStackTrace();
         }
+
         //Bubblesort Algorithmus
         for (int i = 0; i < eingabeDaten.size() - 1; i++) {
             for (int j = 0; j < eingabeDaten.size() - i - 1; j++) {
